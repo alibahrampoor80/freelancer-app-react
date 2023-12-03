@@ -1,0 +1,108 @@
+@import url("/fonts.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    ---primary-900: #456643;
+}
+
+@layer base {
+    :root {
+        --background-app-rgb: 244, 245, 247;
+        --color-primary-900: 74, 109, 255;
+        --color-primary-800: 92, 124, 255;
+        --color-primary-700: 110, 138, 255;
+        --color-primary-600: 128, 153, 255;
+        --color-primary-500: 146, 167, 255;
+        --color-primary-400: 164, 182, 255;
+        --color-primary-300: 183, 197, 255;
+        --color-primary-200: 201, 211, 255;
+        --color-primary-100: 219, 226, 255;
+        --color-primary-50: 228, 233, 255;
+        --color-secondary-900: 42, 45, 83;
+        --color-secondary-800: 63, 66, 100;
+        --color-secondary-700: 85, 87, 117;
+        --color-secondary-600: 106, 108, 135;
+        --color-secondary-500: 127, 129, 152;
+        --color-secondary-400: 148, 150, 169;
+        --color-secondary-300: 170, 171, 186;
+        --color-secondary-200: 191, 192, 203;
+        --color-secondary-100: 212, 213, 221;
+        --color-secondary-50: 223, 223, 229;
+        --color-success: 0, 192, 115;
+        --color-warning: 255, 153, 0;
+        --color-error: 255, 71, 87;
+        --color-red-500: 239, 68, 68;
+        --color-red-300: 252, 165, 165;
+    }
+}
+
+@layer components {
+    .textField__input {
+        @apply w-full py-3 px-4 rounded-xl text-secondary-900 border border-secondary-100 bg-secondary-100 hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
+    }
+
+    .btn {
+        @apply px-3 py-1 font-bold rounded-xl transition-all duration-300;
+    }
+
+    .btn--primary {
+        @apply px-4 py-3 bg-primary-900 text-white hover:bg-primary-800 shadow-lg shadow-primary-300 dark:shadow-secondary-200;
+    }
+
+    .btn--secondary {
+        @apply bg-secondary-600 text-secondary-100;
+    }
+
+    .btn--outline {
+        @apply border border-secondary-700 text-secondary-700;
+    }
+
+    .btn--danger {
+        @apply border border-rose-700 text-rose-700;
+    }
+
+    .badge {
+        @apply inline-block whitespace-nowrap rounded-xl px-2 py-0.5;
+    }
+
+    .badge--primary {
+        @apply bg-primary-900 text-white;
+    }
+
+    .badge--secondary {
+        @apply bg-secondary-200 text-secondary-600;
+    }
+
+    .badge--success {
+        @apply bg-green-500 text-white;
+    }
+
+    .badge--danger {
+        @apply bg-red-500 text-white;
+    }
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Vazir";
+    min-height: 100vh;
+    user-select: none;
+    background-color: #f4f5f7;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/*  react tag input */
