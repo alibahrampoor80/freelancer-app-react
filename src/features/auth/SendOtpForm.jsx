@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
+import TextField from "../../ui/TextField.jsx";
+import {getOtp} from "../../services/authApi.js";
+import {useMutation} from "react-query";
+import toast from "react-hot-toast";
+import Loading from "../../ui/Loading.jsx";
 
-const SendOtpForm = () => {
+const SendOtpForm = ({phoneNumber, setPhoneNumber, sendOtpHandler, isLoading}) => {
+
+
     return (
         <div>
-            <form>
-                <div>
-                    <label htmlFor=""></label>
-                    <input type="text"/>
+            <form className={'space-y-4'} onSubmit={sendOtpHandler}>
+                <TextField value={phoneNumber} name={'phoneNumber'}
+                           onChange={setPhoneNumber}
+                           classNameLabel={"font-bold"}
+                           label={'شماره موبایل'}
+                />
+                <div className={'flex justify-center'}>
+                    {
+                        isLoading ? <Loading/> :
+                            <button className={'btn btn--primary w-full'}
+                                    type={'submit'}>ارسال کد تایید</button>
+                    }
                 </div>
-                <button>ارسال کد تایید</button>
             </form>
         </div>
     );
