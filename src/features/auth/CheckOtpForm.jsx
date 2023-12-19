@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import OTPInput from "react-otp-input";
 import {useMutation} from "react-query";
-import {checkOtp} from "../../services/authApi.js";
+import {checkOtp} from "../../services/authService.js";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {HiArrowRight} from "react-icons/hi";
 import {CiEdit} from "react-icons/ci";
 import Loading from "../../ui/Loading.jsx";
@@ -31,12 +31,14 @@ const CheckOtpForm = ({phoneNumber, onBack, onReSendOtp, otpResponse}) => {
         try {
             const {message, user} = await mutateAsync({phoneNumber, otp})
             toast.success(message)
-            if (user.isActive) {
-                // if (user.role === "OWNER") navigate('/owner')
-                // if (user.role === "FREELANCER") navigate('/freelancer')
-            } else {
-                navigate('/complete-profile')
+            if (!user.isActive) return navigate('/complete-profile')
+            if (!user.status !== 2) {
+                navigate("/")
+                toast("پروفایل شما در انتظار تایید است", {icon: "😒"})
+                return
             }
+            if (user.role === "OWNER") return navigate('/owner')
+            if (user.role === "FREELANCER") return navigate('/freelancer')
         } catch (err) {
             toast.error(err?.response?.data?.message)
         }
@@ -56,8 +58,8 @@ const CheckOtpForm = ({phoneNumber, onBack, onReSendOtp, otpResponse}) => {
                 </p>
             }
             <div className="mb-4 text-secondary-500">
-                <p>  {time > 0 ? <p>{time} ثانیه تا ارسال مجدد کد</p> :
-                    <button onClick={onReSendOtp}>ارسال مجدد کد</button>}</p>
+                <div>{time > 0 ? <p>{time} ثانیه تا ارسال مجدد کد</p> :
+                    <button onClick={onReSendOtp}>ارسال مجدد کد</button>}</div>
             </div>
             <form className={'space-y-8'} onSubmit={checkOtpHandler}>
                 <p className={'font-bold to-secondary-800'}>کد تایید را وارد کنید</p>
@@ -78,7 +80,6 @@ const CheckOtpForm = ({phoneNumber, onBack, onReSendOtp, otpResponse}) => {
                     isLoading ? <Loading/> :
                         <button className={`btn btn--primary w-full`}>تایید کد</button>
                 }
-
             </form>
         </div>
     );

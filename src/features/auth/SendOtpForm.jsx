@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import TextField from "../../ui/TextField.jsx";
-import {getOtp} from "../../services/authApi.js";
+import {getOtp} from "../../services/authService.js";
 import {useMutation} from "react-query";
 import toast from "react-hot-toast";
 import Loading from "../../ui/Loading.jsx";

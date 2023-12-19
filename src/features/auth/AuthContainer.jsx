@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import SendOtpForm from "./SendOtpForm.jsx";
 import CheckOtpForm from "./CheckOtpForm.jsx";
 import {useMutation} from "react-query";
-import {getOtp} from "../../services/authApi.js";
+import {getOtp} from "../../services/authService.js";
 import toast from "react-hot-toast";
 
 const AuthContainer = () => {
-    const [step, setStep] = useState(1)
-    const [phoneNumber, setPhoneNumber] = useState("")
+    const [step, setStep] = useState(2)
+    const [phoneNumber, setPhoneNumber] = useState("09303149371")
 
     const {
         isLoading, error,

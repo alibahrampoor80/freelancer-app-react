@@ -1,11 +1,11 @@
 import React from 'react';
 
-const ProjectTAble = () => {
+const Project = () => {
     return (
         <div>
-
+            project id
         </div>
     );
 };
 
-export default ProjectTAble;
+export default Project;
