@@ -17,7 +17,6 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <Toaster/>
-
             <Routes>
                 <Route path={'/'} element={<p>index page</p>}/>
                 <Route path={'/auth'} element={<Auth/>}/>
