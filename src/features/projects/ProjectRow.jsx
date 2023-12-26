@@ -7,10 +7,15 @@ import {HiOutlineTrash} from "react-icons/hi";
 import {TbPencilMinus} from "react-icons/tb";
 import Modal from "../../ui/Modal.jsx";
 import ConfirmDelete from "../../ui/ConfirmDelete.jsx";
+import useRemoveProject from "./useRemoveProject.js";
+import CreateProjectForm from "./CreateProjectForm.jsx";
 
 const ProjectRow = ({project, index}) => {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+
+    const {isLoadingDelete, removeProject} = useRemoveProject()
+
     return (
         <Table.Row>
             <td>{index + 1}</td>
@@ -21,7 +26,8 @@ const ProjectRow = ({project, index}) => {
             <td>
                 <div className={`flex flex-wrap items-center gap-2 max-w-[200px]`}>
                     {project.tags.map(tag => <span key={tag}
-                                                   className={'badge badge--secondary'}>{tag}</span>
+                                                   className={'badge badge--secondary'}>{tag}
+                    </span>
                     )}
                 </div>
             </td>
@@ -40,7 +46,10 @@ const ProjectRow = ({project, index}) => {
                     <Modal open={isEditOpen}
                            title={` ویرایش ${project.title}`}
                            onClose={() => setIsEditOpen(false)}>
-                        this is modal
+                        <CreateProjectForm
+                            projectToEdit={project}
+                            onClose={() => setIsEditOpen(false)}
+                        />
                     </Modal>
 
                     <button onClick={() => setIsDeleteOpen(true)}>
@@ -53,10 +62,10 @@ const ProjectRow = ({project, index}) => {
                         <ConfirmDelete
                             resourceName={project.title}
                             onClose={() => setIsDeleteOpen(false)}
-                            onConfirm={() => {
-                            }}
+                            onConfirm={() => removeProject(project._id, {
+                                onSuccess: (data) => setIsDeleteOpen(false)
+                            })}
                             disabled={false}
-
                         />
                     </Modal>
                 </div>

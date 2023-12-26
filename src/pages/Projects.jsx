@@ -1,12 +1,15 @@
-import React from 'react';
-import ProjectTable from "../features/projects/ProjectTable.jsx";
+import React, {useState} from 'react';
+
 import ProjectTable2 from "../features/projects/ProjectTable2.jsx";
+import ProjectsHeader from "../features/projects/ProjectsHeader.jsx";
+
 
 
 const Projects = () => {
 
     return (
         <div>
+            <ProjectsHeader/>
             {/*<ProjectTable/>*/}
             <ProjectTable2/>
 
