@@ -16,3 +16,11 @@ export async function editProjectApi({id, newProject}) {
     return await http.patch(`/project/update/${id}`, newProject).then(({data}) => data.data)
 }
 
+export function changeProjectStatusApi({id, data}) {
+    return http.patch(`/project/${id}`, data).then(({data}) => data.data);
+}
+
+export function getProjectApi(id) {
+    return http.get(`/project/${id}`).then(({data}) => data.data);
+}
+

@@ -30,7 +30,7 @@ const CreateProjectForm = ({onClose, projectToEdit = {}}) => {
         reset
     } = useForm({defaultValues: editValues})
     const [tags, setTags] = useState(tagsProjectToEdit || [])
-    const [date, setDate] = useState(new Date(projectToEdit?.deadline || null))
+    const [date, setDate] = useState(new Date(projectToEdit?.deadline || ""))
     const {categories} = useCategories()
     const {isLoadingCreateProject, createProject} = useCreateProject()
     const {editProject, isLoadingEditProject} = useEditProject()

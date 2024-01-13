@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "axios": "^1.6.2",
+    "fs": "^0.0.1-security",
     "heroicon": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -3,12 +3,14 @@ import Table from "../../ui/Table.jsx";
 import truncateText from "../../utils/truncateText.js";
 import {toPersianNumbersWithComma} from "../../utils/toPersianDigits.js";
 import toLocalDateShort from "../../utils/toLocalDateShort.js";
-import {HiOutlineTrash} from "react-icons/hi";
+import {HiEye, HiOutlineTrash} from "react-icons/hi";
 import {TbPencilMinus} from "react-icons/tb";
 import Modal from "../../ui/Modal.jsx";
 import ConfirmDelete from "../../ui/ConfirmDelete.jsx";
 import useRemoveProject from "./useRemoveProject.js";
 import CreateProjectForm from "./CreateProjectForm.jsx";
+import ToggleProjectStatus from "./ToggleProjectStatus.jsx";
+import {Link} from "react-router-dom";
 
 const ProjectRow = ({project, index}) => {
     const [isEditOpen, setIsEditOpen] = useState(false)
@@ -33,10 +35,11 @@ const ProjectRow = ({project, index}) => {
             </td>
             <td>{project.freelancer?.name || "-"}</td>
             <td>
-                {project.status === "OPEN" ?
-                    <span className={`badge badge--success`}>باز</span> :
-                    <span className={`badge badge--danger`}>بسته</span>
-                }
+                {/*{project.status === "OPEN" ?*/}
+                {/*    <span className={`badge badge--success`}>باز</span> :*/}
+                {/*    <span className={`badge badge--danger`}>بسته</span>*/}
+                {/*}*/}
+                <ToggleProjectStatus project={project}/>
             </td>
             <td>
                 <div className="flex items-center gap-x-4">
@@ -51,11 +54,9 @@ const ProjectRow = ({project, index}) => {
                             onClose={() => setIsEditOpen(false)}
                         />
                     </Modal>
-
                     <button onClick={() => setIsDeleteOpen(true)}>
                         <HiOutlineTrash className={'w-5 h-5 text-error'}/>
                     </button>
-
                     <Modal open={isDeleteOpen}
                            title={` حذف ${project.title}`}
                            onClose={() => setIsDeleteOpen(false)}>
@@ -69,6 +70,11 @@ const ProjectRow = ({project, index}) => {
                         />
                     </Modal>
                 </div>
+            </td>
+            <td>
+                <Link to={project._id} className={`flex justify-center`}>
+                    <HiEye className={`w-5 h-5 text-primary-800`}/>
+                </Link>
             </td>
         </Table.Row>
     );

@@ -4,14 +4,10 @@ import CheckOtpForm from "./CheckOtpForm.jsx";
 import {useMutation} from "react-query";
 import {getOtp} from "../../services/authService.js";
 import toast from "react-hot-toast";
-import {useForm} from "react-hook-form";
 
 const AuthContainer = () => {
-    const [step, setStep] = useState(1)
-    const {
-        register, formState: {errors},
-        handleSubmit, getValues
-    } = useForm()
+    const [step, setStep] = useState(2)
+    const [phoneNumber, setPhoneNumber] = useState("09303149371")
 
     const {
         isLoading, error,
@@ -20,12 +16,13 @@ const AuthContainer = () => {
     } = useMutation({
         mutationFn: getOtp,
     })
-    const sendOtpHandler = async (data) => {
-
+    console.log(phoneNumber)
+    const sendOtpHandler = async (e) => {
+        e.preventDefault()
         try {
-            const {message} = await mutateAsync(data)
+            const data = await mutateAsync({phoneNumber})
             setStep(2)
-            toast.success(message)
+            toast.success(data.message)
         } catch (err) {
             toast.error(err?.response?.data?.message)
         }
@@ -35,17 +32,16 @@ const AuthContainer = () => {
     const renderStep = () => {
         switch (step) {
             case 1:
-                return <SendOtpForm register={register}
-                                    sendOtpHandler={handleSubmit(sendOtpHandler)}
+                return <SendOtpForm phoneNumber={phoneNumber}
+                                    sendOtpHandler={sendOtpHandler}
                                     isLoading={isLoading}
-                />
+                                    setPhoneNumber={setPhoneNumber}/>
             case 2:
                 return <CheckOtpForm step={step}
                                      onBack={() => setStep(1)}
                                      onReSendOtp={sendOtpHandler}
-                                     register={register}
+                                     phoneNumber={phoneNumber}
                                      otpResponse={otpResponse}
-                                     phoneNumber={getValues("phoneNumber")}
                 />
             default :
                 return null

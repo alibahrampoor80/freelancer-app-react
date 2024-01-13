@@ -8,7 +8,7 @@ import ProjectRow from "./ProjectRow.jsx";
 const ProjectTable2 = () => {
     const {projects, isLoading} = useOwnerProjects()
     if (isLoading) return <Loading/>
-    if (!projects.length) return <Empty resourceName={`پروژه`}/>
+    if (!projects?.length) return <Empty resourceName={`پروژه`}/>
 
     return (
         <Table>
@@ -22,6 +22,7 @@ const ProjectTable2 = () => {
                 <th>فریلنسر</th>
                 <th>وضعیت</th>
                 <th>عملیات</th>
+                <th>درخواست ها</th>
             </Table.Header>
             <Table.Body>
                 {

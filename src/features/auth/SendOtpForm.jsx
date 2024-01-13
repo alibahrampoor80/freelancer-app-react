@@ -4,19 +4,21 @@ import {getOtp} from "../../services/authService.js";
 import {useMutation} from "react-query";
 import toast from "react-hot-toast";
 import Loading from "../../ui/Loading.jsx";
+import TextField2 from "../../ui/TextField2.jsx";
 
-const SendOtpForm = ({register, setPhoneNumber, sendOtpHandler, isLoading}) => {
+const SendOtpForm = ({setPhoneNumber, sendOtpHandler, isLoading, phoneNumber}) => {
 
 
     return (
         <div>
             <form className={'space-y-4'} onSubmit={sendOtpHandler}>
-                <TextField
-                           name={'phoneNumber'}
-                           register={register}
-                           classNameLabel={"font-bold"}
-                           label={'شماره موبایل'}
-                           required
+                <TextField2
+                    value={phoneNumber}
+                    name={'phoneNumber'}
+                    register={setPhoneNumber}
+                    classNameLabel={"font-bold"}
+                    label={'شماره موبایل'}
+                    required
                 />
                 <div className={'flex justify-center'}>
                     {

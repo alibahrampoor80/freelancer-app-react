@@ -24,6 +24,7 @@ const ProjectTable = () => {
                     <th>فریلنسر</th>
                     <th>وضعیت</th>
                     <th>عملیات</th>
+                    <th>درخواست ها</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -15,3 +15,7 @@ export async function getUser(data) {
     return await http.get('/user/profile', data).then(({data}) => data.data)
 }
 
+export async function logoutApi() {
+    return await http.post('/user/logout').then(({data}) => data.data)
+}
+
