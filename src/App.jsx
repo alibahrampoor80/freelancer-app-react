@@ -15,25 +15,37 @@ import FreelancerDashboard from "./pages/FreelancerDashboard.jsx";
 import Proposals from "./pages/Proposals.jsx";
 import SubmittedProjects from "./pages/SubmittedProjects.jsx";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout.jsx";
+import {ReactQueryDevtools} from "react-query/devtools";
+import ProtectedRoute from "./ui/ProtectedRoute.jsx";
+
 
 function App() {
     const queryClient = new QueryClient()
     return (
         <DarkModeProvider>
             <QueryClientProvider client={queryClient}>
+                <ReactQueryDevtools initialIsOpen={false}/>
                 <Toaster/>
                 <Routes>
                     <Route path={'/'} element={<IndexPage/>}/>
                     <Route path={'/auth'} element={<Auth/>}/>
                     <Route path={'/complete-profile'} element={<CompleteProfile/>}/>
-                    <Route path={'/owner'} element={<OwnerLayout/>}>
+                    <Route path={'/owner'} element={
+                        <ProtectedRoute>
+                            <OwnerLayout/>
+                        </ProtectedRoute>
+                    }>
                         <Route index element={<Navigate to={'dashboard'} replace={true}/>}/>
                         <Route path={'dashboard'} element={<OwnerDashboard/>}/>
                         <Route path={'projects'} element={<Projects/>}/>
                         <Route path={'projects/:id'} element={<Project/>}/>
                     </Route>
                     <Route>
-                        <Route path={`/freelancer`} element={<FreelancerLayout/>}>
+                        <Route path={`/freelancer`} element={
+                            <ProtectedRoute>
+                                <FreelancerLayout/>
+                            </ProtectedRoute>
+                        }>
                             <Route index element={<Navigate to={'dashboard'} replace={true}/>}/>
                             <Route path={`dashboard`} element={<FreelancerDashboard/>}/>
                             <Route path={`proposal`} element={<Proposals/>}/>

@@ -9,7 +9,8 @@ import Loading from "../../ui/Loading.jsx";
 const ChangeProposalStatus = ({onClose, proposalId}) => {
     const {id: projectId} = useParams()
     const {isLoading, changeProposalStatus} = useChangeProposalStatus()
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit} =
+        useForm()
     const options = [
         {label: "رد شده", value: 0},
         {label: "در انتظار تایید", value: 1},

@@ -71,7 +71,7 @@
 }
 
 .rti--tag {
-    background-color: rgb(var(--color-secondary-500));
+    background-color: rgb(var(--color-secondary-500)) !important;
     color: rgb(var(--color-secondary-100));
 }
 
