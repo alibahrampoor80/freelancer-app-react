@@ -19,6 +19,7 @@ import {ReactQueryDevtools} from "react-query/devtools";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 import AdminLayout from "./features/admin/AdminLayout.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
+import Users from "./pages/Users.jsx";
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
                         }>
                             <Route index element={<Navigate to={'dashboard'} replace={true}/>}/>
                             <Route path={`dashboard`} element={<AdminDashboard/>}/>
+                            <Route path={`users`} element={<Users/>}/>
                         </Route>
                     </Route>
 
