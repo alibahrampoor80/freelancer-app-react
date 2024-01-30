@@ -39,6 +39,7 @@ const CheckOtpForm = ({phoneNumber, onBack, onReSendOtp, otpResponse}) => {
             }
             if (user.role === "OWNER") return navigate('/owner')
             if (user.role === "FREELANCER") return navigate('/freelancer')
+            if (user.role === "ADMIN") return navigate('/admin')
         } catch (err) {
             toast.error(err?.response?.data?.message)
         }

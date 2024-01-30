@@ -195,4 +195,17 @@ table td {
     color: rgb(var(--color-secondary-600));
 }
 
+.nav__list {
+    margin: 0;
+    padding: 0;
+    display: none;
+    margin-right: 16px;
+    list-style-type: none;
+    border-right: 1px solid #a1a1a1;
+}
+
+.nav__title--active + .nav__list {
+    display: block;
+}
+
 /*  react tag input */

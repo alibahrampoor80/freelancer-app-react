@@ -19,3 +19,7 @@ export async function logoutApi() {
     return await http.post('/user/logout').then(({data}) => data.data)
 }
 
+export async function getUsersApi() {
+    return await http.get('admin/user/list').then(({data}) => data.data)
+}
+

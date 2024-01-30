@@ -17,6 +17,8 @@ import SubmittedProjects from "./pages/SubmittedProjects.jsx";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout.jsx";
 import {ReactQueryDevtools} from "react-query/devtools";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
+import AdminLayout from "./features/admin/AdminLayout.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
                         <Route path={'projects'} element={<Projects/>}/>
                         <Route path={'projects/:id'} element={<Project/>}/>
                     </Route>
+
                     <Route>
                         <Route path={`/freelancer`} element={
                             <ProtectedRoute>
@@ -52,6 +55,17 @@ function App() {
                             <Route path={`projects`} element={<SubmittedProjects/>}/>
                         </Route>
                     </Route>
+                    <Route>
+                        <Route path={`/admin`} element={
+                            <ProtectedRoute>
+                                <AdminLayout/>
+                            </ProtectedRoute>
+                        }>
+                            <Route index element={<Navigate to={'dashboard'} replace={true}/>}/>
+                            <Route path={`dashboard`} element={<AdminDashboard/>}/>
+                        </Route>
+                    </Route>
+
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
 
