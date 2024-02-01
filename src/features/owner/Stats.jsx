@@ -3,10 +3,9 @@ import {HiCollection, HiCurrencyDollar, HiOutlineViewGrid} from "react-icons/hi"
 import Stat from "../../ui/Stat.jsx";
 
 const Stats = ({projects}) => {
-    const numOfProject = projects.length
-    const numOfAcceptedProject = projects.map(p => p.status === 2).length
-    const numOfAcceptedProposal = projects.reduce((acc, curr) => curr.proposals.length + acc, 0)
-
+    const numOfProject = projects?.length
+    const numOfAcceptedProject = projects?.map(p => p.status === 2).length
+    const numOfAcceptedProposal = projects?.reduce((acc, curr) => curr.proposals.length + acc, 0)
 
     return (
         <div className={`grid grid-cols-3 gap-8 mt-5`}>

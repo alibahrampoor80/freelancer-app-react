@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Table from "../../../ui/Table.jsx";
 import Modal from "../../../ui/Modal.jsx";
+import ChangeUserStatus from "./ChangeUserStatus.jsx";
 
 const UserRow = ({user, index}) => {
     const [open, setOpen] = useState(false)
@@ -24,7 +25,7 @@ const UserRow = ({user, index}) => {
             </td>
             <td>
                 <Modal open={open} onClose={() => setOpen(false)} title={` تغییر وضعیت کاربر`}>
-
+                    <ChangeUserStatus userId={user._id} onClose={() => setOpen(false)}/>
                 </Modal>
                 <button onClick={() => setOpen(true)}>dd</button>
             </td>
