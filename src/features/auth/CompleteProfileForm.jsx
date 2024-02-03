@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import TextField from "../../ui/TextField.jsx";
-import RadioInput from "../../ui/RadioInput.jsx";
 import {useMutation} from "react-query";
 import {completeProfile} from "../../services/authService.js";
 import toast from "react-hot-toast";
@@ -8,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import Loading from "../../ui/Loading.jsx";
 import {useForm} from "react-hook-form";
 import RadioInputGroup from "../../ui/RadioInputGroup.jsx";
+import useUser from "./useUser.js";
 
 const CompleteProfileForm = () => {
     const {
@@ -19,6 +19,12 @@ const CompleteProfileForm = () => {
     const {data, isLoading, mutateAsync} = useMutation({
         mutationFn: completeProfile
     })
+    const {user} = useUser()
+
+    useEffect(() => {
+        if (user) navigate('/', {replace: true})
+    }, [user, navigate])
+
     const onSubmit = async (data) => {
         console.log(data)
         try {

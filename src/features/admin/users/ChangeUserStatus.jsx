@@ -1,29 +1,29 @@
-import React from 'react';
-import RHFSelect from "../../ui/RHFSelect.jsx";
+import RHFSelect from "../../../ui/RHFSelect.jsx";
+import Loading from "../../../ui/Loading.jsx";
 import {useForm} from "react-hook-form";
-import useChangeProposalStatus from "./useChangeProposalStatus.js";
 import {useQueryClient} from "react-query";
-import {useParams} from "react-router-dom";
-import Loading from "../../ui/Loading.jsx";
+import useChangeUserStatus from "./useChangeUserStatus.js";
+
 
 const changeUserStatus = ({onClose, userId}) => {
-    const {id: projectId} = useParams()
-    const {isLoading, changeProposalStatus} = useChangeProposalStatus()
-    const {register, handleSubmit} =
-        useForm()
     const options = [
         {label: "رد شده", value: 0},
-        {label: "در انتظار تایید", value: 1},
+        {label: "در تایید انتظار", value: 1},
         {label: "تایید شده", value: 2},
     ]
+    const {register, handleSubmit} = useForm()
+    const {isLoading, changeUserStatus} = useChangeUserStatus()
     const queryClient = useQueryClient()
     const onSubmit = (data) => {
-        changeProposalStatus({id: proposalId, data}, {
-            onSuccess: () => {
-                onClose()
-                queryClient.invalidateQueries({queryKey: [`project`, projectId]})
+        changeUserStatus(
+            { userId, data }, // {userId, data: {status:0, 1, 2}}
+            {
+                onSuccess: () => {
+                    onClose();
+                    queryClient.invalidateQueries({ queryKey: ["users"] });
+                },
             }
-        })
+        );
     }
     return (
         <div>
